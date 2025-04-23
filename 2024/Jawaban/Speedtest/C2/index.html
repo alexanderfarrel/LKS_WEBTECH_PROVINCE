@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Smooth Circle</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: white;
+      }
+      canvas {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      let mouseX = canvas.width / 2;
+      let mouseY = canvas.height / 2;
+      let targetX = mouseX;
+      let targetY = mouseY;
+      const delayFactor = 0.1;
+
+      canvas.addEventListener("mousemove", function (event) {
+        const rect = canvas.getBoundingClientRect();
+        targetX = event.clientX - rect.left;
+        targetY = event.clientY - rect.top;
+      });
+
+      canvas.addEventListener("mouseleave", function (e) {
+        targetX = Math.min(e.clientX, 400);
+        targetY = Math.min(e.clientY, 400);
+      });
+
+      function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+        s;
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        mouseX = lerp(mouseX, targetX, delayFactor);
+        mouseY = lerp(mouseY, targetY, delayFactor);
+
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, 40, 0, Math.PI * 2);
+        ctx.fillStyle = "green";
+        ctx.fill();
+
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>

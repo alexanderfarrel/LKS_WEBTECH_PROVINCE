@@ -1,0 +1,587 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 1000px;
+  height: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #814004;
+
+  & .logo {
+    margin-bottom: 20px;
+  }
+
+  & .opening-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    gap: 20px;
+
+    & form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%;
+      width: 250px;
+      gap: 5px;
+    }
+
+    & #usernameInput {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      border: rgb(171, 87, 2) 3px solid;
+      background-color: #492502;
+      color: white;
+      outline: none;
+      &::placeholder {
+        color: white;
+      }
+    }
+
+    & #level {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      border: rgb(171, 87, 2) 3px solid;
+      background-color: #492502;
+      color: white;
+      outline: none;
+      &::placeholder {
+        color: white;
+      }
+    }
+    & .btn-box {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      width: 100%;
+
+      & #start {
+        border: none;
+        padding: 5px 5px;
+        color: white;
+        outline: none;
+        border-radius: 10px;
+        background-color: rgb(16, 167, 16);
+        width: 55%;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        & img {
+          width: 28px;
+        }
+        &:disabled {
+          background-color: gray;
+          cursor: not-allowed;
+        }
+      }
+
+      & #instruction {
+        border: none;
+        padding: 5px 5px;
+        border-radius: 10px;
+        outline: none;
+        background-color: rgb(218, 231, 25);
+        width: 45%;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+
+    & .instruction-wrapper {
+      display: none;
+      flex-direction: column;
+      min-width: 400px;
+      background-color: rgba(0, 0, 0, 0.483);
+      color: white;
+      padding: 20px;
+      position: relative;
+      gap: 10px;
+
+      & .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: none;
+        width: 30px;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      & h1 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  & .gameover-wrapper {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 5;
+
+    & .box {
+      background-color: white;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & h1 {
+        margin-bottom: 5px;
+      }
+
+      & .btn-wrapper {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+        & #restart {
+          border: none;
+          padding: 8px 12px;
+          color: white;
+          outline: none;
+          border-radius: 10px;
+          background-color: rgb(16, 167, 24);
+          font-weight: 700;
+          gap: 5px;
+          font-size: 14px;
+          cursor: pointer;
+        }
+
+        & #saveScore {
+          border: none;
+          padding: 8px 12px;
+          color: white;
+          outline: none;
+          border-radius: 10px;
+          background-color: rgb(30, 162, 210);
+          font-weight: 700;
+          gap: 5px;
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  & .game-wrapper {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: relative;
+    user-select: none;
+
+    & .game-field {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      & .detail-wrapper {
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 10;
+
+        & .box {
+          background-color: white;
+          padding: 10px;
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+
+          & #closeDetail {
+            background-color: rgb(218, 38, 38);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-weight: 700;
+            cursor: pointer;
+          }
+        }
+      }
+
+      & .countdown-wrapper {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 10;
+        & h1 {
+          color: white;
+          font-weight: 700;
+          font-size: 100px;
+        }
+      }
+
+      & .seeds-place {
+        position: absolute;
+        left: 96px;
+        top: 123px;
+        width: 674px;
+        height: 442px;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 0;
+
+        & .img-seed-place-wrapper {
+          position: relative;
+          grid-column: 1;
+          grid-row: 1;
+          & .sun {
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+          & .bg-red {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            opacity: 0;
+          }
+          & .img-seed-place {
+            width: 83px;
+            height: 85px;
+          }
+        }
+      }
+
+      & .sun {
+        width: 75px;
+        position: absolute;
+        /* top: 520px; */
+        z-index: 3;
+        top: 0;
+        left: 0px;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      & .background {
+        width: 100%;
+        height: 100%;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+      & .sun-numb {
+        position: absolute;
+        top: 70px;
+        left: 141px;
+        font-size: 20px;
+      }
+
+      & .seeds-wrapper {
+        position: absolute;
+        top: 15px;
+        left: 208px;
+        & img {
+          width: 50px;
+          -webkit-user-drag: none;
+        }
+      }
+
+      & .user-data {
+        position: absolute;
+        font-size: 12px;
+        top: 20px;
+        left: 455px;
+        color: white;
+
+        & .score-wrapper {
+          display: flex;
+          gap: 5px;
+
+          & .score {
+            width: 50px;
+          }
+        }
+        & .time-wrapper {
+          display: flex;
+          gap: 5px;
+
+          & .time {
+            width: 50px;
+          }
+        }
+      }
+      & .shovel {
+        position: absolute;
+        left: 655px;
+        top: 14px;
+        width: 60px;
+        height: 60px;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      & .landmower-lane1 {
+        position: absolute;
+        top: 120px;
+        right: 0px;
+        width: 100%;
+        height: 85px;
+        overflow: hidden;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          left: 0px;
+        }
+      }
+      & .landmower-lane2 {
+        position: absolute;
+        top: 210px;
+        right: 0px;
+        width: 100%;
+        height: 85px;
+        overflow: hidden;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          left: 0px;
+        }
+      }
+      & .landmower-lane3 {
+        position: absolute;
+        top: 300px;
+        right: 0px;
+        width: 100%;
+        height: 85px;
+        overflow: hidden;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          left: 0px;
+        }
+      }
+      & .landmower-lane4 {
+        position: absolute;
+        top: 390px;
+        right: 0px;
+        width: 100%;
+        height: 85px;
+        overflow: hidden;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          left: 0px;
+        }
+      }
+      & .landmower-lane5 {
+        position: absolute;
+        top: 480px;
+        right: 0px;
+        width: 100%;
+        height: 85px;
+        overflow: hidden;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          left: 0px;
+        }
+      }
+
+      & .zombie-lane1 {
+        position: absolute;
+        top: 110px;
+        right: 0px;
+        width: 100%;
+        height: 96px;
+        user-select: none;
+        -webkit-user-drag: none;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          left: 850px;
+          height: 96px;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+      }
+      & .zombie-lane2 {
+        position: absolute;
+        top: 200px;
+        right: 0px;
+        width: 100%;
+        height: 96px;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          height: 96px;
+          left: 850px;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+      }
+      & .zombie-lane3 {
+        position: absolute;
+        top: 290px;
+        right: 0px;
+        width: 100%;
+        height: 96px;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          height: 96px;
+          top: 0;
+          left: 850px;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+      }
+      & .zombie-lane4 {
+        position: absolute;
+        top: 380px;
+        right: 0px;
+        width: 100%;
+        height: 96px;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          top: 0;
+          height: 96px;
+          left: 850px;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+      }
+      & .zombie-lane5 {
+        position: absolute;
+        top: 470px;
+        right: 0px;
+        width: 100%;
+        height: 96px;
+        & img:nth-child(n + 1) {
+          position: absolute;
+          width: 80px;
+          height: 96px;
+          top: 0;
+          /* left: -60px; KO */
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+      }
+    }
+
+    & .leaderboard-wrapper {
+      width: 200px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: #814004;
+      padding: 30px 10px;
+      gap: 10px;
+      color: white;
+      z-index: 2;
+
+      & .title {
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      & #sortBy {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      & .container {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        overflow-y: auto;
+
+        & .box {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          & .side {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            & h1 {
+              font-size: 16px;
+            }
+
+            & p {
+              font-size: 14px;
+              font-style: italic;
+            }
+          }
+          & .detail {
+            background-color: yellow;
+            padding: 8px 5px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

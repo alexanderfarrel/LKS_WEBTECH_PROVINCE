@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bar Chart (Vanilla JS + PHP)</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        overflow-x: scroll;
+      }
+      .chart-container {
+        width: 90%;
+        display: flex;
+        align-items: flex-end;
+        border-left: 2px solid black;
+        height: 500px;
+        position: relative;
+      }
+      #chart {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        height: 100%;
+      }
+      #chart div {
+        font-size: 14px;
+        width: 60px;
+        height: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: black 1px solid;
+      }
+      .x-axis-labels {
+        position: absolute;
+        bottom: -26px;
+        left: 0px;
+        display: flex;
+        padding-top: 10px;
+        border-top: 2px solid black;
+      }
+      .x-axis-labels div {
+        width: 80px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .y-axis-labels {
+        position: absolute;
+        left: -40px;
+        bottom: -10px;
+        display: flex;
+        flex-direction: column;
+        height: 520px;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart-container">
+      <div class="y-axis-labels">
+        <span>500</span>
+        <span>400</span>
+        <span>300</span>
+        <span>200</span>
+        <span>100</span>
+        <span>0</span>
+      </div>
+      <div id="chart"></div>
+      <div class="x-axis-labels" id="x-axis"></div>
+    </div>
+
+    <script>
+      async function fetchData() {
+        const response = await fetch("random.php");
+        const data = await response.json();
+
+        const xAxis = document.getElementById("x-axis");
+        const chart = document.getElementById("chart");
+
+        const maxValue = 500;
+
+        data.forEach((item) => {
+          let bar = document.createElement("div");
+          bar.style.height = `${item.value}px`;
+          bar.style.backgroundColor = `hsl(${Math.random() * 360}, 50%, 70%)`;
+          chart.appendChild(bar);
+
+          let label = document.createElement("div");
+          label.innerText = item.name;
+          xAxis.appendChild(label);
+        });
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

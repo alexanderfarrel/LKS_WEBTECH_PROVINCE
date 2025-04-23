@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Shooter Game</title>
+  </head>
+  <body>
+    <!-- Introduction -->
+    <section class="introContainer" id="introContainer">
+      <form action="submit" id="introductionForm">
+        <main class="box">
+          <img src="./Sprites/shooter.png" alt="shooter" class="shooterImg" / >
+          <input
+            type="text"
+            placeholder="Input Username"
+            class="usernameInput"
+            name="username"
+            required
+          />
+          <select name="level" id="level" class="levelInput" required>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <!-- gun choice -->
+          <div class="containerGun">
+            <span class="wrapperGun">
+              <label for="gun1"
+                ><img class="gun1" src="./Sprites/gun1.png" alt=""
+              /></label>
+              <input
+                type="radio"
+                name="gun"
+                id="gun1"
+                required
+                value="1"
+                checked
+              />
+            </span>
+            <span class="wrapperGun">
+              <label for="gun2"
+                ><img class="gun2" src="./Sprites/gun2.png" alt=""
+              /></label>
+              <input type="radio" name="gun" id="gun2" required value="2" />
+            </span>
+          </div>
+          <!-- board choice -->
+          <div class="containerBoard">
+            <span class="wrapperBoard">
+              <label for="board1"
+                ><img src="./Sprites/target1.png" alt=""
+              /></label>
+              <input
+                type="radio"
+                name="board"
+                id="board1"
+                required
+                value="1"
+                checked
+              />
+            </span>
+            <span class="wrapperBoard">
+              <label for="board2"
+                ><img src="./Sprites/target2.png" alt=""
+              /></label>
+              <input type="radio" name="board" id="board2" required value="2" />
+            </span>
+            <span class="wrapperBoard">
+              <label for="board3"
+                ><img src="./Sprites/target3.png" alt=""
+              /></label>
+              <input type="radio" name="board" id="board3" required value="3" />
+            </span>
+          </div>
+          <div class="buttonBox">
+            <button class="disabledBtn" id="playBtn" type="submit">
+              Play Game
+            </button>
+            <button class="instructionBtn" id="instruction" type="button">
+              Instruction
+            </button>
+          </div>
+        </main>
+      </form>
+      <aside class="sideBox">
+        <article>
+          <span class="close"><p>x</p></span>
+          <h2>How To Play Game</h2>
+          <span class="paragraph">
+            <p>1. Input Username</p>
+            <p>1. Point the pointer at the target</p>
+            <p>1. Click to shoot</p>
+            <p>1. Get as many point as possible</p>
+            <p>1. Enjoy!</p>
+          </span>
+        </article>
+      </aside>
+    </section>
+    <!-- Ingame -->
+    <section class="gameContainer">
+      <main class="wrapper" id="gameWrapper">
+        <img
+          src="./Sprites/background.jpg"
+          alt="background"
+          class="gameBackground"
+        />
+        <nav>
+          <h1>Player : <span id="playerName">Name</span></h1>
+          <h1>Score : <span id="score">0</span></h1>
+          <h1>Time : <span class="time" id="time">00:00</span></h1>
+        </nav>
+        <div class="gameBoard" id="gameBoard">
+          <div class="gameGunWrapper" id="gameGunWrapper">
+            <img
+              src="./Sprites/gun1.png"
+              alt="gun"
+              class="gameGun"
+              id="gameGun"
+            />
+          </div>
+        </div>
+        <!-- Countdown -->
+        <section class="countdown" id="countdown">
+          <h1 id="countdownNumber">3</h1>
+        </section>
+        <!-- Pause -->
+        <section class="pausedContainer" id="pausedContainer">
+          <main>
+            <h1>Paused</h1>
+            <button id="pausedBtn">Continue</button>
+          </main>
+        </section>
+        <!-- Game Over -->
+        <section class="gameOverContainer" id="gameOverContainer">
+          <main>
+            <h1>Game Over</h1>
+            <p>
+              <span id="gameOverUsername">alex</span> :
+              <span id="gameOverScore">0</span>
+            </p>
+            <div class="btnBox">
+              <button class="tryAgainBtn" id="tryAgainBtn">Try Again</button>
+              <button class="saveScoreBtn" id="saveScoreBtn">Save Score</button>
+            </div>
+          </main>
+        </section>
+      </main>
+      <aside class="leaderboard">
+        <h1 class="title">LEADERBOARD</h1>
+        <select
+          name="sortedLeaderboard"
+          id="sortedLeaderboard"
+          class="sortedLeaderboard"
+        >
+          <option value="score">Sort By Score</option>
+          <option value="lastMatch">Sort By Last Match</option>
+        </select>
+        <main class="scoreBoardWrapper" id="scoreBoardWrapper"></main>
+      </aside>
+    </section>
+  </body>
+  <script src="script.js"></script>
+</html>

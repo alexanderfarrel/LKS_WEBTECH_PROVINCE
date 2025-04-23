@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Plants vs Zombie</title>
+  </head>
+  <body>
+    <section class="container" id="container">
+      <!-- opening -->
+      <div class="opening-wrapper" id="opening-wrapper">
+        <form id="opening-form">
+          <img
+            src="./Sprites/General/logo.png"
+            alt=""
+            width="100%"
+            class="logo"
+          />
+          <input
+            type="text"
+            name="username"
+            id="usernameInput"
+            placeholder="Input Username"
+          />
+          <select name="level" id="level">
+            <option value="none" hidden>Select Level</option>
+            <option value="ease">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <div class="btn-box">
+            <button id="start" type="submit">
+              <img src="./Sprites/General/Shovel.png" alt="" />Play Game
+            </button>
+            <button id="instruction" type="button">Instruction</button>
+          </div>
+        </form>
+        <!-- instruction -->
+        <div class="instruction-wrapper" id="instruction-wrapper">
+          <img
+            src="./Sprites/General/close-icon.png"
+            alt=""
+            class="close-btn"
+            id="close-btn"
+          />
+          <h1>How to play game</h1>
+          <p>1. Input Username</p>
+          <p>2. Take the sun to choose the plant card</p>
+          <p>3. Put a plan cards into the field to fight zombies</p>
+          <p>4. Don't let zombies pass through the yard</p>
+          <p>5. Enjoy!</p>
+        </div>
+      </div>
+      <!-- countdown -->
+
+      <!-- GAME -->
+      <div class="game-wrapper" id="game-wrapper">
+        <div class="game-field" id="gameField">
+          <div class="countdown-wrapper" id="countdown-wrapper">
+            <h1 id="countdown-numb">3</h1>
+          </div>
+          <!-- game over -->
+          <div class="gameover-wrapper" id="gameoverWrapper">
+            <div class="box">
+              <h1>Game Over</h1>
+              <h3 id="usernameGameover">Player Name</h3>
+              <h3>Score : <span id="scoreGameover">30</span></h3>
+              <h3>Time : <span id="timeGameover">00:00</span></h3>
+              <div class="btn-wrapper">
+                <button id="restart">Restart</button>
+                <button id="saveScore">Save Score</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-wrapper" id="detailWrapper">
+            <div class="box">
+              <h1 style="text-align: center">Detail</h1>
+              <h3 class="usernameDetail">
+                Username :
+                <span id="usernameDetail">Player Name</span>
+              </h3>
+              <h3>
+                Score : <span class="scoreDetail" id="scoreDetail">30</span>
+              </h3>
+              <h3>
+                Time : <span class="timeDetail" id="timeDetail">00:00</span>
+              </h3>
+              <h3>Level : <span id="levelDetail">Easy</span></h3>
+              <h3>
+                Date :
+                <span class="dateDetail" id="dateDetail">00/00/0000</span>
+              </h3>
+              <button id="closeDetail">Close</button>
+            </div>
+          </div>
+
+          <!-- seeds place -->
+          <div class="seeds-place" id="seedsPlace">
+            <!-- <div class="img-seed-place-wrapper">
+              <img src="./Sprites/General/Sun.png" class="sun" alt="" />
+              <span class="bg-red"></span>
+              <img
+                src="./Sprites/SunFlower/frame_00_delay-0.06s.gif"
+                alt=""
+                class="img-seed-place"
+              />
+            </div> -->
+          </div>
+
+          <img
+            src="./Sprites/General/Background.jpg"
+            alt=""
+            class="background"
+          />
+          <h1 class="sun-numb" id="sunNumb">100</h1>
+          <div class="seeds-wrapper">
+            <img
+              src="./Sprites/Seeds/SunFlowerSeed.png"
+              alt=""
+              id="sunFlower"
+            />
+            <img src="./Sprites/Seeds/WallNutSeed.png" alt="" id="wallNut" />
+            <img
+              src="./Sprites/Seeds/PeaShooterSeed.png"
+              alt=""
+              id="peaShooter"
+            />
+            <img src="./Sprites/Seeds/IcePeaSeed.png" alt="" id="icePea" />
+          </div>
+          <!-- user data -->
+          <div class="user-data">
+            <h1 id="username">Player Name</h1>
+            <div class="score-wrapper">
+              <h1 class="score">Score</h1>
+              <h1>: <span id="score">30</span></h1>
+            </div>
+            <div class="time-wrapper">
+              <h1 class="time">Time</h1>
+              <h1>: <span id="time">00:00</span></h1>
+            </div>
+          </div>
+          <img
+            src="./Sprites/General/Shovel.png"
+            alt=""
+            class="shovel"
+            id="shovel"
+          />
+          <!-- landmowers -->
+          <div class="landmower-lane1">
+            <img
+              src="./Sprites/General/lawnmowerIdle.gif"
+              id="lawnmower1"
+              alt=""
+            />
+          </div>
+          <div class="landmower-lane2">
+            <img
+              src="./Sprites/General/lawnmowerIdle.gif"
+              id="lawnmower2"
+              alt=""
+            />
+          </div>
+          <div class="landmower-lane3">
+            <img
+              src="./Sprites/General/lawnmowerIdle.gif"
+              id="lawnmower3"
+              alt=""
+            />
+          </div>
+          <div class="landmower-lane4">
+            <img
+              src="./Sprites/General/lawnmowerIdle.gif"
+              id="lawnmower4"
+              alt=""
+            />
+          </div>
+          <div class="landmower-lane5">
+            <img
+              src="./Sprites/General/lawnmowerIdle.gif"
+              id="lawnmower5"
+              alt=""
+            />
+          </div>
+          <div class="zombie-lane1" id="zombieLine1">
+            <!-- <img src="./Sprites/Zombie/frame_00_delay-0.05s.gif" alt="" /> -->
+          </div>
+          <div class="zombie-lane2" id="zombieLine2">
+            <!-- <img src="./Sprites/Zombie/frame_00_delay-0.05s.gif" alt="" /> -->
+          </div>
+          <div class="zombie-lane3" id="zombieLine3">
+            <!-- <img src="./Sprites/Zombie/frame_00_delay-0.05s.gif" alt="" /> -->
+          </div>
+          <div class="zombie-lane4" id="zombieLine4">
+            <!-- <img src="./Sprites/Zombie/frame_00_delay-0.05s.gif" alt="" /> -->
+          </div>
+          <div class="zombie-lane5" id="zombieLine5">
+            <!-- <img src="./Sprites/Zombie/frame_00_delay-0.05s.gif" alt="" /> -->
+          </div>
+        </div>
+
+        <!-- leaderboard -->
+        <div class="leaderboard-wrapper">
+          <h1 class="title">LEADERBOARD</h1>
+          <select name="sortBy" id="sortBy">
+            <option value="score">Sort By Score</option>
+            <option value="time">Sort By Time</option>
+          </select>
+          <div class="container" id="leaderboardContainer">
+            <!-- <div class="box">
+              <div class="side">
+                <h1>Username</h1>
+                <p>Score : 44</p>
+              </div>
+              <button class="detail" id="detail">Detail</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="script.js"></script>
+</html>

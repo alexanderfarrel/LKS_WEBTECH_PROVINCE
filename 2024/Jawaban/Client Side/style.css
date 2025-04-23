@@ -1,0 +1,416 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  outline: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.disabledBtn {
+  pointer-events: none;
+  background-color: rgb(187, 182, 182);
+  color: gray;
+  width: 100%;
+  border: none;
+  padding: 8px 10px;
+  font-weight: bold;
+  border-radius: 7px;
+}
+
+.introContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+
+  & .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    gap: 10px;
+    padding: 10px;
+    & .shooterImg {
+      width: 150px;
+    }
+
+    & .usernameInput,
+    .levelInput {
+      color: black;
+      width: 100%;
+      padding: 6px 10px;
+      border: 2px solid gray;
+      border-radius: 10px;
+      background-color: rgb(226, 226, 226);
+      &::placeholder {
+        color: black;
+      }
+    }
+
+    & .containerGun {
+      display: flex;
+      gap: 10px;
+      & .wrapperGun {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        & img {
+          width: 60px;
+        }
+      }
+    }
+
+    & .containerBoard {
+      display: flex;
+      gap: 10px;
+
+      & .wrapperBoard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        & img {
+          width: 60px;
+        }
+      }
+    }
+
+    & .buttonBox {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      & .playBtn {
+        width: 100%;
+        background-color: rgb(5, 177, 5);
+        border: none;
+        padding: 8px 10px;
+        font-weight: bold;
+        color: white;
+        border-radius: 7px;
+      }
+      & .instructionBtn {
+        width: 80%;
+        background-color: rgb(177, 5, 5);
+        border: none;
+        padding: 8px 10px;
+        font-weight: bold;
+        color: white;
+        border-radius: 7px;
+      }
+    }
+  }
+}
+
+.sideBox {
+  & article {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    background-color: rgb(53, 52, 52);
+    color: white;
+    padding: 20px;
+    width: 380px;
+    height: 380px;
+    & .close {
+      position: absolute;
+      background-color: red;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      right: 10px;
+      top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & p {
+        margin-top: -4px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+    & h2 {
+      margin-bottom: 20px;
+    }
+    & .paragraph {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
+
+.gameContainer {
+  position: relative;
+  user-select: none;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  & .wrapper {
+    cursor: url("./Sprites/pointer.png") 25 25, auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    & .gameBackground {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    & nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 50px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.278);
+    }
+    & .gameBoard {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      & .boom {
+        position: absolute;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+      }
+      & .gameTarget {
+        position: absolute;
+        width: 150px;
+        border-radius: 50%;
+        opacity: 0;
+        animation: fadein 0.2s ease-in-out forwards;
+      }
+      & .gameGunWrapper {
+        position: relative;
+        width: 350px;
+        height: 250px;
+        left: 35%;
+        top: 70%;
+        overflow: hidden;
+        & .gameGun {
+          width: 100%;
+          position: absolute;
+          z-index: 1;
+        }
+      }
+    }
+
+    & .countdown {
+      position: absolute;
+      display: flex;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.513);
+      justify-content: center;
+      align-items: center;
+      font-size: 100px;
+      font-weight: bold;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    & .pausedContainer {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: rgba(0, 0, 0, 0.49);
+      justify-content: center;
+      align-items: center;
+      cursor: auto;
+
+      & main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        background-color: white;
+        width: 150px;
+        height: 100px;
+        border-radius: 10px;
+
+        & h1 {
+          font-size: 20px;
+        }
+
+        & button {
+          cursor: pointer;
+          border: none;
+          padding: 10px 20px;
+          background-color: rgb(0, 0, 0);
+          color: white;
+          font-size: 16px;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    & .gameOverContainer {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: rgba(0, 0, 0, 0.49);
+      cursor: auto;
+      & main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+
+        & .btnBox {
+          display: flex;
+          gap: 10px;
+          & button {
+            cursor: pointer;
+            border: none;
+            padding: 8px 12px;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            font-size: 15px;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  & .leaderboard {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: rgb(46, 45, 45);
+    z-index: 3;
+    padding: 15px 20px;
+    color: white;
+
+    & .title {
+      text-transform: uppercase;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    & .sortedLeaderboard {
+      margin-top: 10px;
+      border: none;
+      padding: 8px 5px;
+      border-radius: 8px;
+    }
+
+    & .scoreBoardWrapper {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      overflow-y: scroll;
+      height: 100%;
+      & .scoreBoard {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 5px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.639);
+        & aside {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          font-size: 14px;
+          & h1 {
+            font-weight: bold;
+          }
+        }
+        & button {
+          cursor: pointer;
+          border: none;
+          padding: 8px 12px;
+          background-color: rgb(233, 249, 8);
+          font-size: 14px;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+/* fadein animation */
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popup {
+  from {
+    top: 100%;
+  }
+  to {
+    top: 0%;
+  }
+}
+
+@keyframes popdown {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+.notCompatible {
+  position: fixed;
+  display: flex;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  gap: 10px;
+  text-align: center;
+  p {
+    font-weight: normal;
+    font-size: 40px;
+  }
+}
